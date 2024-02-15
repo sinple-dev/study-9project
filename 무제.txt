@@ -1,0 +1,12 @@
+
+
+
+
+solid 원칙
+
+수정에는 닫혀있고 확장에는 열려있다.
+
+
+runtime exception vs throwable
+Checked Exception
+Unchecked Exception

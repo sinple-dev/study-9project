@@ -1,4 +1,4 @@
-package com.example.fastcampus.boardserver;
+package com.fastcampus.boardserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
