@@ -10,3 +10,7 @@ solid 원칙
 runtime exception vs throwable
 Checked Exception
 Unchecked Exception
+
+
+자바21
+https://mangkyu.tistory.com/308

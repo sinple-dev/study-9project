@@ -34,9 +34,9 @@ public class UserController {
     @PostMapping("sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     public void signUp(@RequestBody UserDTO userDTO) {
-        if (UserDTO.hasNullDataBeforeSignup(userDTO)) {
-            throw new NullPointerException("회원가입시 필수 데이터를 모두 입력해야 합니다.");
-        }
+//        if (UserDTO.hasNullDataBeforeSignup(userDTO)) {
+//            throw new NullPointerException("회원가입시 필수 데이터를 모두 입력해야 합니다.");
+//        }
         userService.register(userDTO);
     }
 
@@ -47,16 +47,16 @@ public class UserController {
         String userId = loginRequest.getUserId();
         String password = loginRequest.getPassword();
         UserDTO userInfo = userService.login(userId, password);
-        String id = userInfo.getId().toString();
+//        String id = userInfo.getId().toString();
 
         if (userInfo == null) {
             return HttpStatus.NOT_FOUND;
         } else if (userInfo != null) {
             LoginResponse loginResponse = LoginResponse.success(userInfo);
-            if (userInfo.getStatus() == (UserDTO.Status.ADMIN))
-                SessionUtil.setLoginAdminId(session, id);
-            else
-                SessionUtil.setLoginMemberId(session, id);
+//            if (userInfo.getStatus() == (UserDTO.Status.ADMIN))
+//                SessionUtil.setLoginAdminId(session, id);
+//            else
+//                SessionUtil.setLoginMemberId(session, id);
 
             responseEntity = new ResponseEntity<LoginResponse>(loginResponse, HttpStatus.OK);
         } else {
