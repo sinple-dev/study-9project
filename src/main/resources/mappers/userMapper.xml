@@ -19,9 +19,9 @@
     <update id="updateUserProfile" parameterType="com.fastcampus.boardserver.dto.UserDTO">
         UPDATE user
         SET password=#{password},
-        nickName=#{nickName},
-        isWithDraw=#{isWithDraw},
-        status=#{status}
+            nickName=#{nickName},
+            isWithDraw=#{isWithDraw},
+            status=#{status}
         WHERE id = #{id}
     </update>
 
@@ -38,30 +38,16 @@
 
     <select id="findByIdAndPassword" resultType="com.fastcampus.boardserver.dto.UserDTO">
         SELECT id,
-        userId,
-        passWord,
-        nickName,
-        createTime,
-        isWithDraw,
-        status
+               userId,
+               passWord,
+               nickName,
+               createTime,
+               isWithDraw,
+               status
         FROM user
-        WHERE id = #{id}
-        AND passWord = #{password}
-        AND status != 'DELETE'
-    </select>
-
-    <select id="findByUserIdAndPassword" resultType="com.fastcampus.boardserver.dto.UserDTO">
-        SELECT id,
-        userId,
-        passWord,
-        nickName,
-        createTime,
-        isWithDraw,
-        status
-        FROM user
-        WHERE userId = #{userId}
-        AND passWord = #{password}
-        AND status != 'DELETE'
+        WHERE userId = #{id}
+          AND passWord = #{password}
+          AND status != 'DELETE'
     </select>
 
     <select id="idCheck" resultType="int">

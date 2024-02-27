@@ -24,6 +24,7 @@ public class UserController {
 
     private final UserServiceImpl userService;
     private static final ResponseEntity<LoginResponse> FAIL_RESPONSE = new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
+    private static LoginResponse loginResponse;
 
     @Autowired
     public UserController(UserServiceImpl userService) {
@@ -47,16 +48,16 @@ public class UserController {
         String userId = loginRequest.getUserId();
         String password = loginRequest.getPassword();
         UserDTO userInfo = userService.login(userId, password);
-//        String id = userInfo.getId().toString();
+        String id = userInfo.getId().toString();
 
         if (userInfo == null) {
             return HttpStatus.NOT_FOUND;
         } else if (userInfo != null) {
-            LoginResponse loginResponse = LoginResponse.success(userInfo);
-//            if (userInfo.getStatus() == (UserDTO.Status.ADMIN))
-//                SessionUtil.setLoginAdminId(session, id);
-//            else
-//                SessionUtil.setLoginMemberId(session, id);
+            loginResponse = LoginResponse.success(userInfo);
+            if (userInfo.getStatus() == (UserDTO.Status.ADMIN))
+                SessionUtil.setLoginAdminId(session, id);
+            else
+                SessionUtil.setLoginMemberId(session, id);
 
             responseEntity = new ResponseEntity<LoginResponse>(loginResponse, HttpStatus.OK);
         } else {
@@ -65,7 +66,6 @@ public class UserController {
 
         return HttpStatus.OK;
     }
-
     @GetMapping("my-info")
     public UserInfoResponse memberInfo(HttpSession session) {
         String id = SessionUtil.getLoginMemberId(session);

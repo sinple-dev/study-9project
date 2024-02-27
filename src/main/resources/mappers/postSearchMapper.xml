@@ -36,11 +36,25 @@
         <if test="sortStatus.toString() == 'CATEGORIES'">
             ORDER BY categoryId
         </if>
-
     </select>
 
-    <!--    <sql id="COMMON_PAGING_TAIL">-->
-    <!--        LIMIT #{categoryDTO.searchCount, jdbcType=INTEGER} OFFSET #{categoryDTO.pagingStartOffset, jdbcType=INTEGER}-->
-    <!--    </sql>-->
+
+
+    <select id="getPostByTag" resultType="com.fastcampus.boardserver.dto.request.PostSearchRequest">
+        SELECT p.`id`,
+               p.`name`,
+               p.`isAdmin`,
+               p.`contents`,
+               p.`createTime`,
+               p.`views`,
+               p.`categoryId`,
+               p.`userId`,
+               p.`fileId`,
+               p.`updateTime`
+        FROM post p
+                 JOIN posttag pt ON p.id = pt.postId
+                 JOIN tag t ON pt.tagId = t.id
+        WHERE t.name = #{tagName}
+    </select>
 
 </mapper>
