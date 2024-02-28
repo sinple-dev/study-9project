@@ -2,8 +2,6 @@ package com.fastcampus.boardserver.dto;
 
 import lombok.*;
 
-import java.util.List;
-
 @Builder
 @Getter
 @Setter
@@ -15,5 +13,4 @@ public class TagDTO {
     private String name;
     private String url;
     private int postId;
-    private List<TagDTO> tagDTOList;
 }

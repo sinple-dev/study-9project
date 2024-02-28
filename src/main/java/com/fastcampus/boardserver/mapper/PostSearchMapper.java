@@ -1,6 +1,5 @@
 package com.fastcampus.boardserver.mapper;
 
-import com.fastcampus.boardserver.dto.CategoryDTO;
 import com.fastcampus.boardserver.dto.PostDTO;
 import com.fastcampus.boardserver.dto.request.PostSearchRequest;
 import org.apache.ibatis.annotations.Mapper;

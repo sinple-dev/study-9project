@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 public class CategoryController {
 
-    private final CategoryServiceImpl categoryService;
+    private CategoryServiceImpl categoryService;
 
     public CategoryController(CategoryServiceImpl categoryService) {
         this.categoryService = categoryService;

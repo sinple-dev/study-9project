@@ -16,8 +16,8 @@ public class SHA256Util {
             sh.update(str.getBytes());
             byte[] byteData = sh.digest();
             StringBuilder sb = new StringBuilder();
-            for (byte byteDatum : byteData) {
-                sb.append(Integer.toString((byteDatum & 0xff) + 0x100, 16).substring(1));
+            for (int i = 0; i < byteData.length; i++) {
+                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
             }
             SHA = sb.toString();
         } catch (NoSuchAlgorithmException e) {

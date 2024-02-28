@@ -1,9 +1,9 @@
 package com.fastcampus.boardserver.config;
 
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -11,20 +11,20 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.fastcampus.boardserver.mapper")
-public class MysqlConfig {
+@MapperScan(basePackages = "com.fastcampus.boardserver")
+public class MySQLConfig {
 
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception{
-
-        final SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource);
+    @Bean
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource);
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResource("classpath:mappers/*.xml"));
+        sessionFactory.setMapperLocations(resolver.getResources("classpath:mappers/*.xml"));
 
         Resource myBatisConfig = new PathMatchingResourcePatternResolver().getResource("classpath:mybatis-config.xml");
-        sqlSessionFactoryBean.setConfigLocation(myBatisConfig);
+        sessionFactory.setConfigLocation(myBatisConfig);
 
-        return sqlSessionFactoryBean.getObject();
+        return sessionFactory.getObject();
     }
 }

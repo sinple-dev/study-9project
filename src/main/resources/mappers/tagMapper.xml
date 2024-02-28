@@ -8,9 +8,9 @@
     <insert id="register" parameterType="com.fastcampus.boardserver.dto.TagDTO">
         INSERT INTO `tag`
         (`name`,
-        `url`)
+         `url`)
         VALUES (#{name},
-        #{url})
+                #{url})
         <selectKey keyProperty="id" resultType="Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>

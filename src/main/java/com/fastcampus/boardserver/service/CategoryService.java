@@ -1,5 +1,6 @@
 package com.fastcampus.boardserver.service;
 
+
 import com.fastcampus.boardserver.dto.CategoryDTO;
 
 public interface CategoryService {
@@ -9,5 +10,4 @@ public interface CategoryService {
     void update(CategoryDTO categoryDTO);
 
     void delete(int categoryId);
-
 }

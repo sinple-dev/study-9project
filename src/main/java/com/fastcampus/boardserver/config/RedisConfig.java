@@ -1,6 +1,5 @@
 package com.fastcampus.boardserver.config;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -21,8 +20,6 @@ import java.time.Duration;
 
 @Configuration
 public class RedisConfig {
-
-
     @Value("${spring.data.redis.host}")
     private String redisHost;
 
@@ -42,7 +39,6 @@ public class RedisConfig {
         mapper.registerModules(new JavaTimeModule(), new Jdk8Module());
         return mapper;
     }
-
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
@@ -68,6 +64,4 @@ public class RedisConfig {
         return RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(redisConnectionFactory)
                 .cacheDefaults(configuration).build();
     }
-
-
 }

@@ -25,14 +25,14 @@ public class PostServiceImpl implements PostService {
     private PostMapper postMapper;
 
     @Autowired
-    private UserProfileMapper userProfileMapper;
-
-    @Autowired
     private CommentMapper commentMapper;
 
     @Autowired
     private TagMapper tagMapper;
 
+
+    @Autowired
+    private UserProfileMapper userProfileMapper;
 
     @CacheEvict(value="getProducts", allEntries = true)
     @Override
@@ -83,7 +83,6 @@ public class PostServiceImpl implements PostService {
             throw new RuntimeException("updateProducts ERROR! 물품 삭제 메서드를 확인해주세요\n" + "Params : " + productId);
         }
     }
-
     @Override
     public void registerComment(CommentDTO commentDTO) {
         if (commentDTO.getPostId() != 0) {

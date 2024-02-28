@@ -35,9 +35,9 @@ public class UserController {
     @PostMapping("sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     public void signUp(@RequestBody UserDTO userDTO) {
-//        if (UserDTO.hasNullDataBeforeSignup(userDTO)) {
-//            throw new NullPointerException("회원가입시 필수 데이터를 모두 입력해야 합니다.");
-//        }
+        if (UserDTO.hasNullDataBeforeSignup(userDTO)) {
+            throw new NullPointerException("회원가입시 필수 데이터를 모두 입력해야 합니다.");
+        }
         userService.register(userDTO);
     }
 
@@ -66,6 +66,7 @@ public class UserController {
 
         return HttpStatus.OK;
     }
+
     @GetMapping("my-info")
     public UserInfoResponse memberInfo(HttpSession session) {
         String id = SessionUtil.getLoginMemberId(session);
@@ -90,8 +91,6 @@ public class UserController {
 
         try {
             userService.updatePassword(Id, beforePassword, afterPassword);
-            UserDTO userInfo = userService.login(Id, afterPassword);
-            LoginResponse loginResponse = LoginResponse.success(userInfo);
             ResponseEntity.ok(new ResponseEntity<LoginResponse>(loginResponse, HttpStatus.OK));
         } catch (IllegalArgumentException e) {
             log.error("updatePassword 실패", e);
@@ -107,9 +106,7 @@ public class UserController {
         String Id = SessionUtil.getLoginMemberId(session);
 
         try {
-            UserDTO userInfo = userService.login(Id, userDeleteId.getPassword());
             userService.deleteId(Id, userDeleteId.getPassword());
-            LoginResponse loginResponse = LoginResponse.success(userInfo);
             responseEntity = new ResponseEntity<LoginResponse>(loginResponse, HttpStatus.OK);
         } catch (RuntimeException e) {
             log.info("deleteID 실패");

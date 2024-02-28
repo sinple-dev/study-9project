@@ -21,11 +21,9 @@ public class PostSearchController {
 
     @PostMapping
     public PostSearchResponse search(@RequestBody PostSearchRequest postSearchRequest) {
-        List<PostDTO> postDTOList = postSearchService.getProducts(postSearchRequest);
+        List<PostDTO> postDTOList = postSearchService.getPosts(postSearchRequest);
         return new PostSearchResponse(postDTOList);
     }
-
-
 
     @GetMapping
     public PostSearchResponse searchByTagName(String tagName) {
@@ -33,6 +31,7 @@ public class PostSearchController {
         return new PostSearchResponse(postDTOList);
     }
 
+    // -------------- response 객체 --------------
 
     @Getter
     @AllArgsConstructor
