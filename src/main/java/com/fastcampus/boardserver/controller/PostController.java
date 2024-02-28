@@ -36,6 +36,7 @@ public class PostController {
     @ResponseStatus(HttpStatus.CREATED)
     @LoginCheck(type = LoginCheck.UserType.ADMIN)
     public ResponseEntity<CommonResponse<PostDTO>> registerPost(String accountId, @RequestBody PostDTO postDTO) {
+        log.info("registerPost : " + postDTO.toString());
         postService.register(accountId, postDTO);
         CommonResponse commonResponse = new CommonResponse<>(HttpStatus.OK, "SUCCESS", "registerPost", postDTO);
         return ResponseEntity.ok(commonResponse);

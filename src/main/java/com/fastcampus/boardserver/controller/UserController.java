@@ -44,6 +44,7 @@ public class UserController {
     @PostMapping("sign-in")
     public HttpStatus login(@RequestBody UserLoginRequest loginRequest,
                             HttpSession session) {
+        log.info("loginRequest : " + loginRequest.toString());
         ResponseEntity<LoginResponse> responseEntity = null;
         String userId = loginRequest.getUserId();
         String password = loginRequest.getPassword();
