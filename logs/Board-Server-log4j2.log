@@ -1,0 +1,4 @@
+[36m2024/03/03 15:36:31,958[m [32m[INFO ][m [org.springframework.boot.StartupInfoLogger] [33m[main][m- Started BoardServerApplication in 1.168 seconds (process running for 1.558)
+ -[36m2024/03/03 15:36:31,960[m [34m[DEBUG][m [org.springframework.boot.availability.ApplicationAvailabilityBean] [33m[main][m- Application availability state LivenessState changed to CORRECT
+ -[36m2024/03/03 15:36:31,961[m [34m[DEBUG][m [org.springframework.boot.availability.ApplicationAvailabilityBean] [33m[main][m- Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+ -
