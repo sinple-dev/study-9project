@@ -2,10 +2,12 @@ package com.fastcampus.boardserver.service.impl;
 
 
 import com.fastcampus.boardserver.dto.CategoryDTO;
+import com.fastcampus.boardserver.exception.BoardServerException;
 import com.fastcampus.boardserver.mapper.CategoryMapper;
 import com.fastcampus.boardserver.service.CategoryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void update(CategoryDTO categoryDTO) {
-        if (categoryDTO != null) {
+        if (categoryDTO != null && categoryDTO.getName() != null) {
             categoryMapper.updateCategory(categoryDTO);
         } else {
             log.error("update ERROR! {}", categoryDTO);
@@ -39,7 +41,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void delete(int categoryId) {
         if (categoryId != 0) {
-            categoryMapper.deleteCategory(categoryId);
+            try {
+                categoryMapper.deleteCategory(categoryId);
+            } catch (RuntimeException e) {
+                log.error("delete 실패", categoryId);
+                throw new RuntimeException("delete 실패 + " + categoryId);
+            }
         } else {
             log.error("deleteCategory ERROR! {}", categoryId);
             throw new RuntimeException("deleteCategory ERROR! 물품 카테고리 삭제 메서드를 확인해주세요\n" + "Params : " + categoryId);
