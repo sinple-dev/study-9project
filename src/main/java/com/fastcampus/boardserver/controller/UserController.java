@@ -31,7 +31,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @PostMapping("sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     public void signUp(@RequestBody UserDTO userDTO) {
