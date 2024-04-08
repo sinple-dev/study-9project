@@ -1,39 +1,37 @@
 package com.example.webflux1.service;
 
-import com.example.webflux1.client.PostClient;
-import com.example.webflux1.dto.PostResponse;
+import com.example.webflux1.repository.Post;
+import com.example.webflux1.repository.PostR2dbcRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
-import java.util.List;
-
-@Service
 @RequiredArgsConstructor
+@Service
 public class PostServiceV2 {
-    private final PostClient postClient;
+    private final PostR2dbcRepository postR2dbcRepository;
 
-    public Mono<PostResponse> getPostContent(Long id) {
-        return postClient.getPost(id)
-                .onErrorResume(error -> Mono.just(new PostResponse(id.toString(), "Fallback data %d".formatted(id))));
-        // 에러 발생했을때 생성자를 이용해서 에러가아닌 데이터를 반환
+    public Mono<Post> create(Long userId, String title, String content) {
+        return postR2dbcRepository.save(Post.builder()
+                .userId(userId)
+                .title(title)
+                .content(content)
+                .build());
     }
 
-    public Flux<PostResponse> getMultiplePostContent(List<Long> idList) {
-        return Flux.fromIterable(idList)
-                .flatMap(this::getPostContent)
-                .log();
+    public Flux<Post> findAll() {
+        return postR2dbcRepository.findAll();
+    }
+    public Mono<Post> findById(Long id) {
+        return postR2dbcRepository.findById(id);
     }
 
-    public Flux<PostResponse> getParallelMultiplePostContent(List<Long> idList) {
-        return Flux.fromIterable(idList)
-                .parallel()
-                .runOn(Schedulers.parallel())
-                .flatMap(this::getPostContent)
-                .log()
-                .sequential();
+    public Flux<Post> findAllByUserId(Long id) {
+        return postR2dbcRepository.findAllByUserId(id);
     }
 
+    public Mono<Void> deleteById(Long id) {
+        return postR2dbcRepository.deleteById(id);
+    }
 }

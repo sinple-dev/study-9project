@@ -18,7 +18,6 @@ public class PostService {
     public Mono<PostResponse> getPostContent(Long id) {
         return postClient.getPost(id)
                 .onErrorResume(error -> Mono.just(new PostResponse(id.toString(), "Fallback data %d".formatted(id))));
-        // 에러 발생했을때 생성자를 이용해서 에러가아닌 데이터를 반환
     }
 
     public Flux<PostResponse> getMultiplePostContent(List<Long> idList) {
