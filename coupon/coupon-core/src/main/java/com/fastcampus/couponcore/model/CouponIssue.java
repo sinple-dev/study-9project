@@ -1,4 +1,4 @@
-package model;
+package com.fastcampus.couponcore.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
