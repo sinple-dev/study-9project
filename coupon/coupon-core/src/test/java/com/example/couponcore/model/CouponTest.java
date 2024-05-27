@@ -1,14 +1,12 @@
-package com.fastcampus.couponcore.model;
+package com.example.couponcore.model;
 
-import com.fastcampus.couponcore.exception.CouponIssueException;
+import com.example.couponcore.exception.CouponIssueException;
+import com.example.couponcore.exception.ErrorCode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-
-import static com.fastcampus.couponcore.exception.ErrorCode.INVALID_COUPON_ISSUE_DATE;
-import static com.fastcampus.couponcore.exception.ErrorCode.INVALID_COUPON_ISSUE_QUANTITY;
 
 class CouponTest {
 
@@ -124,7 +122,7 @@ class CouponTest {
                 .build();
         // when & then
         CouponIssueException exception = Assertions.assertThrows(CouponIssueException.class, coupon::issue);
-        Assertions.assertEquals(exception.getErrorCode(), INVALID_COUPON_ISSUE_QUANTITY);
+        Assertions.assertEquals(exception.getErrorCode(), ErrorCode.INVALID_COUPON_ISSUE_QUANTITY);
     }
 
     @Test
@@ -139,7 +137,7 @@ class CouponTest {
                 .build();
         // when & then
         CouponIssueException exception = Assertions.assertThrows(CouponIssueException.class, coupon::issue);
-        Assertions.assertEquals(exception.getErrorCode(), INVALID_COUPON_ISSUE_DATE);
+        Assertions.assertEquals(exception.getErrorCode(), ErrorCode.INVALID_COUPON_ISSUE_DATE);
     }
 
     @Test

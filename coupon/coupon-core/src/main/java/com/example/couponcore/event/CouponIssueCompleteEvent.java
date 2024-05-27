@@ -1,4 +1,4 @@
-package com.fastcampus.couponcore.event;
+package com.example.couponcore.event;
 
 public class CouponIssueCompleteEvent {
 }

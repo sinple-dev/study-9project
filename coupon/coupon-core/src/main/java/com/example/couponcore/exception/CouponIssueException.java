@@ -1,5 +1,5 @@
 
-package com.fastcampus.couponcore.exception;
+package com.example.couponcore.exception;
 
 import lombok.Getter;
 

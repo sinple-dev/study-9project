@@ -1,4 +1,4 @@
-package com.fastcampus.couponcore.exception;
+package com.example.couponcore.exception;
 
 public enum ErrorCode {
     INVALID_COUPON_ISSUE_QUANTITY("쿠폰 발급 수량이 유효하지 않습니다."),

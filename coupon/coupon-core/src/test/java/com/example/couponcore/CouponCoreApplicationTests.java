@@ -1,4 +1,4 @@
-package com.fastcampus.couponcore;
+package com.example.couponcore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

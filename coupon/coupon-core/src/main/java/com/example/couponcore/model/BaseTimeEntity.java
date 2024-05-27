@@ -1,4 +1,4 @@
-package com.fastcampus.couponcore.model;
+package com.example.couponcore.model;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

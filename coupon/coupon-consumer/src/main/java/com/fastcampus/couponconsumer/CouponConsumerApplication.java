@@ -1,6 +1,6 @@
 package com.fastcampus.couponconsumer;
 
-import com.fastcampus.couponcore.CouponCoreConfiguration;
+import com.example.couponcore.CouponCoreConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
