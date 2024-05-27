@@ -1,4 +1,4 @@
-package com.fastcampus.couponapi;
+package com.example.couponapi;
 
 import com.example.couponcore.CouponCoreConfiguration;
 import org.springframework.boot.SpringApplication;

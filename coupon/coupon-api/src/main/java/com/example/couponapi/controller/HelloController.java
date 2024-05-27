@@ -1,4 +1,4 @@
-package com.fastcampus.couponapi.controller;
+package com.example.couponapi.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
