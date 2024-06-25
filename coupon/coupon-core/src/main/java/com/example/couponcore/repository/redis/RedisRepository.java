@@ -57,22 +57,22 @@ public class RedisRepository {
         return redisTemplate.opsForList().size(key);
     }
 
-//    public void issueRequest(long couponId, long userId, int totalIssueQuantity) {
-//        String issueRequestKey = getIssueRequestKey(couponId);
-//        CouponIssueRequest couponIssueRequest = new CouponIssueRequest(couponId, userId);
-//        try {
-//            String code = redisTemplate.execute(
-//                    issueScript,
-//                    List.of(issueRequestKey, issueRequestQueueKey),
-//                    String.valueOf(userId),
-//                    String.valueOf(totalIssueQuantity),
-//                    objectMapper.writeValueAsString(couponIssueRequest)
-//            );
-//            CouponIssueRequestCode.checkRequestResult(CouponIssueRequestCode.find(code));
-//        } catch (JsonProcessingException e) {
-//            throw new CouponIssueException(FAIL_COUPON_ISSUE_REQUEST, "input: %s".formatted(couponIssueRequest));
-//        }
-//    }
+    public void issueRequest(long couponId, long userId, int totalIssueQuantity) {
+        String issueRequestKey = getIssueRequestKey(couponId);
+        CouponIssueRequest couponIssueRequest = new CouponIssueRequest(couponId, userId);
+        try {
+            String code = redisTemplate.execute(
+                    issueScript,
+                    List.of(issueRequestKey, issueRequestQueueKey),
+                    String.valueOf(userId),
+                    String.valueOf(totalIssueQuantity),
+                    objectMapper.writeValueAsString(couponIssueRequest)
+            );
+            CouponIssueRequestCode.checkRequestResult(CouponIssueRequestCode.find(code));
+        } catch (JsonProcessingException e) {
+            throw new CouponIssueException(FAIL_COUPON_ISSUE_REQUEST, "input: %s".formatted(couponIssueRequest));
+        }
+    }
 
     private RedisScript<String> issueRequestScript() {
         String script = """
