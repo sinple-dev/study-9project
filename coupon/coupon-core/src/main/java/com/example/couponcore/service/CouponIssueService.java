@@ -1,6 +1,6 @@
 package com.example.couponcore.service;
 
-import com.example.couponcore.event.CouponIssueCompleteEvent;
+import com.example.couponcore.model.event.CouponIssueCompleteEvent;
 import com.example.couponcore.exception.CouponIssueException;
 import com.example.couponcore.model.Coupon;
 import com.example.couponcore.model.CouponIssue;
@@ -30,7 +30,7 @@ public class CouponIssueService {
         Coupon coupon = findCoupon(couponId);
         coupon.issue();
         saveCouponIssue(couponId, userId);
-
+        publishCouponEvent(coupon);
     }
 
     @Transactional(readOnly = true)
@@ -57,4 +57,9 @@ public class CouponIssueService {
         }
     }
 
+    private void publishCouponEvent(Coupon coupon) {
+        if (coupon.isIssueComplete()) {
+            applicationEventPublisher.publishEvent(new CouponIssueCompleteEvent(coupon.getId()));
+        }
+    }
 }
