@@ -42,22 +42,23 @@ public class KafkaConfig {
 		return new KafkaStreamsConfiguration(myConfig);
 	}
 
+	@Bean
+	public KafkaTemplate<String, Object> kafkaTempLate() {
+		return new KafkaTemplate<>(producerFactory());
+	}
+
+	@Bean
+	public ProducerFactory<String, Object> producerFactory() {
+		Map<String, Object> myConfig = new HashMap<>();
+		myConfig.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "");
+		myConfig.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+		myConfig.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, com.example.demo.util.CustomSerializer.class);
+		return new DefaultKafkaProducerFactory<>(myConfig);
+	}
 
 
-	// @Bean
-	// public KafkaTemplate<String, Object> kafkaTempLate() {
-	// 	return new KafkaTemplate<>(producerFactory());
-	// }
-	//
-	// @Bean
-	// public ProducerFactory<String, Object> producerFactory() {
-	// 	Map<String, Object> myConfig = new HashMap<>();
-	// 	myConfig.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "");
-	// 	myConfig.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-	// 	myConfig.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-	// 	return new DefaultKafkaProducerFactory<>(myConfig);
-	// }
-	//
+
+
 	// @Bean
 	// public ConsumerFactory<String, Object> consumerFactory() {
 	// 	Map<String, Object> myConfig = new HashMap<>();

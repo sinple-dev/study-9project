@@ -15,10 +15,13 @@ public class Producer {
 	@Autowired
 	public Producer(KafkaTemplate kafkaTemplate) {
 		this.kafkaTemplate = kafkaTemplate;
-
 	}
 
 	public void pub(String msg) {
+		kafkaTemplate.send(topicName, msg);
+	}
+
+	public void sendJoinedMsg(String topicName, Object msg) {
 		kafkaTemplate.send(topicName, msg);
 	}
 
