@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.config.TopicConfig;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -30,6 +31,9 @@ public class KafkaConfig {
 	@Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
 	public KafkaStreamsConfiguration kStreamsConfigs() {
 		Map<String, Object> myConfig = new HashMap<>();
+
+		// id 값을 설정해서 내가 보내는 주체가누구인지 설정
+		myConfig.put(StreamsConfig.APPLICATION_ID_CONFIG, "kafka-streams");
 		// ip 여러개 넣을수 있음.
 		myConfig.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092, localhost:9093, localhost:9094");
 		myConfig.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
@@ -39,6 +43,12 @@ public class KafkaConfig {
 		// 노드를 3개를 만들었으니까, 파티션도 3개로 하자.
 		// kafka 를 3개 만들었으니까 쓰레드도 3개로
 		myConfig.put(StreamsConfig.NUM_STREAM_THREADS_CONFIG, 3);
+
+		// all인경우는 브로커가 메세지를 받았다고 확인을 받아야 다음 메세지를 전송할수있음.
+		myConfig.put(StreamsConfig.producerPrefix(ProducerConfig.ACKS_CONFIG), "all");
+		// 레플리카가 2개이상 확정일때
+		myConfig.put(StreamsConfig.topicPrefix(TopicConfig.MIN_IN_SYNC_REPLICAS_CONFIG), "2");
+
 		return new KafkaStreamsConfiguration(myConfig);
 	}
 
